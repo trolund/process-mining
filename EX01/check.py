@@ -1,37 +1,9 @@
+from EX01.ex01 import PetriNet
 from compare import CodeJudge
 
 
-class PetriNet():
+def check_correcness():
 
-    def __init__(self):
-
-
-    def add_place(self, name):
-
-
-    def add_transition(self, name, id):
-
-
-    def add_edge(self, source, target):
-
-
-    def get_tokens(self, place):
-
-
-    def is_enabled(self, transition):
-
-
-    def add_marking(self, place):
-
-
-    def fire_transition(self, transition):
-# code here
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-def check_correcness:
     judge = CodeJudge()
     p = PetriNet()
 
@@ -77,7 +49,7 @@ def check_correcness:
     # by the end of the execution there should be 2 tokens on the final place
     print(p.get_tokens(4))
 
-    expexted = """"False False False False
+    expexted = """False False False False 
 True False False False
 False True True False
 False False False True
