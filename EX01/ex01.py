@@ -1,4 +1,4 @@
-from EX01.transition import Transition
+from transition import Transition
 
 
 class PetriNet:
@@ -48,14 +48,16 @@ class PetriNet:
         return len(list(filter(lambda token: token == place, self.M)))
 
     def is_enabled(self, transition_id):
-        token_count = 0
-        for tran in self.T:
-            if tran.id == transition_id:
-                for pre in tran.pre:
-                    if pre in self.M:
-                        token_count += 1
+        # find transition
+        tran = self.find_transition(transition_id)
 
-                return token_count == len(tran.pre)
+        if tran is None:
+            print("Transition was not found")
+            return self
+
+        token_count = len(list(filter(lambda pre_place: pre_place in self.M, tran.pre)))
+
+        return token_count == len(tran.pre)
 
     # add a token
     def add_marking(self, place):
@@ -65,7 +67,7 @@ class PetriNet:
 
     def fire_transition(self, transition_id):
         # find transition
-        tran = next((x for x in self.T if x.id == transition_id), None)
+        tran = self.find_transition(transition_id)
 
         if tran is None:
             print("Transition was not found")
@@ -78,3 +80,6 @@ class PetriNet:
             self.M.append(post)
 
         return self
+
+    def find_transition(self, transition_id):
+        return next((x for x in self.T if x.id == transition_id), None)
