@@ -2,7 +2,7 @@ from EX02.event import Event
 
 
 def log_as_dictionary(log: str):
-    dict = {}
+    log_dictionary = {}
 
     # iterate over all input lines
     for line in log.splitlines():
@@ -21,16 +21,16 @@ def log_as_dictionary(log: str):
         time = parts[3]
 
         # init list if it is None
-        if dict.get(case_id) is None:
-            dict[case_id] = []
+        if log_dictionary.get(case_id) is None:
+            log_dictionary[case_id] = []
 
         # put data into a event object
         event = Event(case_id=case_id, name=task_name, date=time, user_id=user_id)
 
         # append that object to resulting dictionary
-        dict[case_id].append(event)
+        log_dictionary[case_id].append(event)
 
-    return dict
+    return log_dictionary
 
 
 def dependency_graph(log):
