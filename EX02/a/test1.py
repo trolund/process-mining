@@ -1,4 +1,4 @@
-from EX02.one import log_as_dictionary, dependency_graph
+from EX02.a.one import log_as_dictionary, dependency_graph
 
 f = """
 Task_A;case_1;user_1;2019-09-09 17:36:47

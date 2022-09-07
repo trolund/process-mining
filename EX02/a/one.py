@@ -1,4 +1,4 @@
-from EX02.event import Event
+from event import Event
 
 
 def log_as_dictionary(log: str):
