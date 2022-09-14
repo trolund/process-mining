@@ -33,26 +33,42 @@ def dependency_graph(log):
 def unique_events(log):
     # initialize result list
     unique_list = []
-    unique_name_list = []
+    unique_name_list = set()
+
+    start_events = set()
+    end_events = set()
 
     # iterate cases
     for case in log:
         for i in range(len(log[case]) - 1):
             event = log[case][i + 1]
+
+            # find start events
+            if i == 0:
+                start_events.add(event["concept:name"])
+
+            # find end events
+            if i == len(log[case]) - 2:
+                end_events.add(event["concept:name"])
+
             # print(event["concept:name"])
             # check if exists in unique_list or not, if not added it
             if event["concept:name"] not in unique_name_list:
-                unique_name_list.append(event["concept:name"])
+                unique_name_list.add(event["concept:name"])
                 unique_list.append(event)
 
     # print(unique_name_list)
-    return unique_list
+    return (list(unique_name_list), list(start_events), list(end_events))
 
 
 
 
 def alpha(log):
-    all_events = unique_events(log)
+    (all_events, start_events, end_events) = unique_events(log)
+
+    print(start_events)
+    print(end_events)
+    print(all_events)
 
 
 if __name__ == '__main__':
