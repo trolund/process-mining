@@ -1,8 +1,5 @@
 from transition import Transition
 
-from EX03 import event
-
-
 class PetriNet:
     # places consist of a name
     P = []
@@ -12,6 +9,8 @@ class PetriNet:
     F = []
     # marking (consist of place ID's)
     M = []
+
+    curr_trans_id = -1
 
     def __init__(self):
         self.F = []
@@ -23,7 +22,10 @@ class PetriNet:
         self.P.append(name)
         return self
 
-    def add_transition(self, name, id):
+    def add_transition(self, name, id = curr_trans_id):
+
+        self.curr_trans_id = self.curr_trans_id - 1
+
         # create transition
         t = Transition(name, id)
 
@@ -34,12 +36,12 @@ class PetriNet:
 
     def add_edge(self, source, target):
         # if id (source, target) is under 0 it is the id of a transition
-        if target < 0:
+        if not isinstance(target, str) and isinstance(target, int):
             for transition in self.T:
                 if transition.id == target:
                     transition.pre.append(source)
 
-        if source < 0:
+        if not isinstance(source, str) and isinstance(source, int):
             for transition in self.T:
                 if transition.id == source:
                     transition.post.append(target)
@@ -87,7 +89,6 @@ class PetriNet:
         return next((x for x in self.T if x.id == transition_id), None)
 
     def transition_name_to_id(self, name):
-        trans: event = next((x for x in self.T if x.name == name), None)
-
+        trans = next((x for x in self.T if x.value == name), None)
         return trans.id
 
